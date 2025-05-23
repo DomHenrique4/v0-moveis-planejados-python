@@ -1,0 +1,542 @@
+/**
+ * Estilos para a aplicação de Móveis Planejados
+ *
+ * Este arquivo contém todos os estilos personalizados para a aplicação,
+ * organizados por componentes e seções.
+ */
+
+/* Variáveis CSS para consistência de cores e estilos */
+:root {
+  --primary-color: #2c3e50; /* Cor principal da marca */
+  --secondary-color: #34495e; /* Cor secundária da marca */
+  --accent-color: #e67e22; /* Cor de destaque para elementos importantes */
+  --light-color: #f8f9fa; /* Cor clara para fundos */
+  --dark-color: #343a40; /* Cor escura para textos e fundos */
+  --text-color: #333; /* Cor padrão para textos */
+  --border-radius: 0.375rem; /* Raio de borda padrão */
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Sombra padrão */
+  --transition: all 0.3s ease; /* Transição padrão para animações */
+}
+
+/* Estilos Gerais */
+body {
+  font-family: "Roboto", sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Títulos de seção */
+.section-title {
+  position: relative;
+  margin-bottom: 2rem;
+  font-size: 2.25rem;
+}
+
+/* Descrições de seção */
+.section-description {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin-bottom: 2rem;
+}
+
+/* Botões */
+.btn {
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1.5rem;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+/* Header - Menu de Navegação */
+.header-transparent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+  transition: var(--transition);
+}
+
+/* Estilo do header quando o usuário faz scroll */
+.header-transparent.scrolled {
+  background-color: var(--primary-color);
+  padding: 0.5rem 0;
+  box-shadow: var(--box-shadow);
+}
+
+/* Animação do logo no header */
+.navbar-brand img {
+  transition: var(--transition);
+}
+
+/* Reduz o tamanho do logo quando o header está no modo scrolled */
+.header-transparent.scrolled .navbar-brand img {
+  height: 35px;
+}
+
+/* Links de navegação */
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: var(--transition);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+  color: #fff;
+}
+
+/* Hero com efeito Parallax */
+.hero-parallax {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Fundo com efeito parallax */
+.parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  background-image: url("/static/img/hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+/* Overlay escuro sobre a imagem de fundo */
+.hero-parallax::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+/* Conteúdo do hero */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+}
+
+/* Cards de Categoria */
+.categoria-card {
+  border: none;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+/* Animações para Cards da Home */
+.categoria-card,
+.produto-card,
+.testimonial-card {
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+/* Efeito hover mais suave nos cards de categoria */
+.categoria-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+/* Efeito hover nos cards de produto */
+.produto-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2);
+}
+
+/* Efeito hover nos cards de depoimento */
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Animação para as imagens dentro dos cards */
+.categoria-card img,
+.produto-card img {
+  transition: var(--transition);
+}
+
+.categoria-card:hover img,
+.produto-card:hover img {
+  transform: scale(1.1);
+}
+
+/* Efeito de brilho nos botões dos cards */
+.categoria-card .btn,
+.produto-card .btn {
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.categoria-card .btn:hover,
+.produto-card .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+/* Animação de entrada para os cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+}
+
+/* Efeito hover nos cards de categoria */
+.categoria-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Imagens nos cards de categoria */
+.categoria-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Título nos cards de categoria */
+.categoria-card .card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* Seção "Design que Inspira" */
+.design-inspiration-img {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+/* Efeito de zoom nas imagens de inspiração */
+.design-inspiration-img img {
+  transition: var(--transition);
+}
+
+.design-inspiration-img:hover img {
+  transform: scale(1.05);
+}
+
+/* Cards de Depoimentos */
+.testimonial-card {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+/* Estrelas de avaliação */
+.testimonial-rating {
+  font-size: 1.25rem;
+}
+
+/* Texto do depoimento */
+.testimonial-text {
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+/* Autor do depoimento */
+.testimonial-author h5 {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* Banners de páginas internas */
+.catalog-banner,
+.category-banner,
+.contact-banner {
+  background-color: var(--primary-color);
+  background-image: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  padding: 8rem 0 4rem;
+  margin-bottom: 2rem;
+}
+
+/* Cards de Produto */
+.produto-card {
+  border: none;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+/* Efeito hover nos cards de produto */
+.produto-card:hover {
+  box-shadow: var(--box-shadow);
+  transform: translateY(-5px);
+}
+
+/* Imagens nos cards de produto */
+.produto-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Estilos dos Filtros */
+.filter-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* Área de opções de filtro com scroll */
+.filter-options {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Melhorias nos Filtros */
+.filter-actions {
+  border-top: 1px solid #dee2e6;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.filter-input {
+  cursor: pointer;
+}
+
+.filter-input:checked + label {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Botão de filtros com estado alterado */
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #000;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+  border-color: #d39e00;
+}
+
+/* Produtos Relacionados */
+.produto-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.produto-image-container img {
+  transition: var(--transition);
+}
+
+.produto-image-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Tags de produto */
+.produto-tags .badge {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+}
+
+/* Badge de destaque */
+.badge.bg-warning {
+  color: #000 !important;
+}
+
+/* Efeito hover nos botões */
+.btn-hover-effect {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Animação de loading */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.btn:disabled {
+  animation: pulse 1.5s infinite;
+}
+
+/* Melhorias na seção de produtos relacionados */
+.section-title {
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* Efeito cascata para cards */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Estilos da Página de Contato */
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Ícones de contato */
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-right: 1rem;
+}
+
+/* Texto de informações de contato */
+.contact-text h5 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Links de redes sociais */
+.social-links {
+  display: flex;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  transition: var(--transition);
+}
+
+.social-link:hover {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+/* Container do mapa */
+.map-container {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark-color);
+}
+
+/* Responsividade para os novos elementos */
+@media (max-width: 767.98px) {
+  .filter-actions .btn {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .produto-tags {
+    text-align: center;
+  }
+
+  .d-flex.gap-3 {
+    flex-direction: column;
+    gap: 1rem !important;
+  }
+}
+
+/* Responsividade */
+@media (max-width: 991.98px) {
+  /* Ajusta a altura do hero em telas menores */
+  .hero-parallax {
+    height: 80vh;
+  }
+
+  /* Sempre mostra o header com fundo em telas menores */
+  .header-transparent {
+    background-color: var(--primary-color);
+    padding: 0.5rem 0;
+  }
+}
+
+@media (max-width: 767.98px) {
+  /* Reduz o tamanho dos títulos em telas menores */
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  /* Reduz o tamanho do título do hero em telas menores */
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+}

@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="bg-light py-3">
+    <div class="container">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'catalogo' %}">Catálogo</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'categoria_detalhe' produto.categoria.slug %}">{{ produto.categoria.nome }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ produto.nome }}</li>
+        </ol>
+    </div>
+</nav>
+
+<!-- Detalhes do Produto -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Imagem Principal e Galeria -->
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="produto-imagem-principal mb-3">
+                    <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" class="img-fluid rounded">
+                </div>
+                
+                {% if produto.imagens.all %}
+                <div class="row produto-galeria">
+                    {% for imagem in produto.imagens.all %}
+                    <div class="col-3 mb-3">
+                        <a href="{{ imagem.imagem.url }}" class="galeria-item" data-lightbox="produto-galeria">
+                            <img src="{{ imagem.imagem.url }}" alt="{{ produto.nome }}" class="img-fluid rounded">
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Informações do Produto -->
+            <div class="col-lg-6">
+                <h1 class="mb-3">{{ produto.nome }}</h1>
+                
+                <div class="produto-categoria mb-3">
+                    <span class="badge bg-primary">{{ produto.categoria.nome }}</span>
+                    {% for ambiente in produto.ambientes.all %}
+                    <span class="badge bg-secondary">{{ ambiente.nome }}</span>
+                    {% endfor %}
+                </div>
+                
+                <div class="produto-descricao mb-4">
+                    <p>{{ produto.descricao }}</p>
+                </div>
+                
+                <div class="produto-caracteristicas mb-4">
+                    <h4 class="mb-3">Características</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i> Design personalizado</li>
+                        <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i> Materiais de alta qualidade</li>
+                        <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i> Acabamento premium</li>
+                        <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i> Garantia de 5 anos</li>
+                    </ul>
+                </div>
+                
+                <div class="produto-cta">
+                    <a href="{% url 'contato' %}" class="btn btn-primary btn-lg">Solicitar Orçamento</a>
+                    <a href="{% url 'catalogo' %}" class="btn btn-outline-secondary btn-lg ms-2">Voltar ao Catálogo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Produtos Relacionados -->
+{% if produtos_relacionados %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+        <h2 class="section-title">Você Também Pode Gostar</h2>
+        <p class="section-description">Outros produtos da categoria {{ produto.categoria.nome }}</p>
+      </div>
+    </div>
+    
+    <div class="row">
+      {% for produto_rel in produtos_relacionados %}
+      <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card produto-card h-100 animate-on-scroll">
+          <div class="produto-image-container">
+            <img src="{{ produto_rel.imagem_principal.url }}" class="card-img-top" alt="{{ produto_rel.nome }}">
+            {% if produto_rel.destaque %}
+            <span class="badge bg-warning position-absolute top-0 end-0 m-2">
+              <i class="fas fa-star me-1"></i>Destaque
+            </span>
+            {% endif %}
+          </div>
+          <div class="card-body">
+            <h3 class="card-title h6">{{ produto_rel.nome }}</h3>
+            <p class="card-text small text-muted">{{ produto_rel.descricao|truncatewords:10 }}</p>
+            
+            <!-- Tags de ambiente -->
+            <div class="produto-tags mb-2">
+              {% for ambiente in produto_rel.ambientes.all|slice:":2" %}
+              <span class="badge bg-light text-dark me-1">{{ ambiente.nome }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="card-footer bg-white border-0">
+            <div class="d-grid">
+              <a href="{% url 'produto_detalhe' produto_rel.slug %}" class="btn btn-outline-primary btn-sm">
+                <i class="fas fa-eye me-2"></i>Ver Detalhes
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    
+    <!-- Link para ver mais produtos da categoria -->
+    <div class="text-center mt-4">
+      <a href="{% url 'categoria_detalhe' produto.categoria.slug %}" class="btn btn-primary">
+        <i class="fas fa-th-large me-2"></i>Ver Todos os Produtos de {{ produto.categoria.nome }}
+      </a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Seção de Sugestões Personalizadas -->
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <h3 class="mb-4">Gostou deste produto?</h3>
+        <p class="lead mb-4">Nossa equipe pode criar uma solução personalizada para o seu espaço, adaptando este design às suas necessidades específicas.</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a href="{% url 'contato' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-comments me-2"></i>Solicitar Orçamento
+          </a>
+          <a href="{% url 'catalogo' %}" class="btn btn-outline-secondary btn-lg">
+            <i class="fas fa-search me-2"></i>Explorar Mais Produtos
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+<script>
+    // Configuração do lightbox
+    lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true
+    });
+</script>
+{% endblock %}

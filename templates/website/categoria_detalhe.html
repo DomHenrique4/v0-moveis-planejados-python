@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Banner da Categoria -->
+<section class="category-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center text-white">
+                <h1 class="display-4 fw-bold">{{ categoria.nome }}</h1>
+                <p class="lead">{{ categoria.descricao }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Produtos da Categoria -->
+<section class="py-5">
+    <div class="container">
+        {% if produtos %}
+        <div class="row">
+            {% for produto in produtos %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card produto-card h-100">
+                    <img src="{{ produto.imagem_principal.url }}" class="card-img-top" alt="{{ produto.nome }}">
+                    <div class="card-body">
+                        <h3 class="card-title h5">{{ produto.nome }}</h3>
+                        <p class="card-text small">{{ produto.descricao|truncatewords:15 }}</p>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <a href="{% url 'produto_detalhe' produto.slug %}" class="btn btn-outline-primary btn-sm w-100">Ver Detalhes</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-info">
+            <p class="mb-0">Nenhum produto encontrado nesta categoria.</p>
+        </div>
+        {% endif %}
+        
+        <div class="text-center mt-4">
+            <a href="{% url 'catalogo' %}" class="btn btn-primary">Ver Catálogo Completo</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

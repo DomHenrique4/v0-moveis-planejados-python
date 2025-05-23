@@ -1,0 +1,17 @@
+# Requisitos para a aplicação de Móveis Planejados
+
+# Framework web principal
+django==4.2.7  # Framework web completo para Python
+
+# API REST
+fastapi==0.104.1  # Framework moderno e rápido para APIs
+uvicorn==0.24.0  # Servidor ASGI para FastAPI
+
+# ORM para a API
+sqlalchemy==2.0.23  # ORM para interagir com o banco de dados
+
+# Processamento de imagens
+pillow==10.1.0  # Biblioteca para manipulação de imagens
+
+# Formulários e uploads
+python-multipart==0.0.6  # Suporte para upload de arquivos no FastAPI

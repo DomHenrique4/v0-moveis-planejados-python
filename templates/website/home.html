@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Primeira dobra - Parallax -->
+<section class="hero-parallax">
+    <div class="parallax-bg"></div>
+    <div class="container">
+        <div class="hero-content text-center text-white">
+            <h1 class="display-4 fw-bold mb-4">Móveis Planejados com Design Exclusivo</h1>
+            <p class="lead mb-5">Transforme sua casa com móveis planejados de alta qualidade, projetados especialmente para o seu espaço e estilo de vida.</p>
+            <a href="{% url 'catalogo' %}" class="btn btn-primary btn-lg">Explorar Catálogo</a>
+        </div>
+    </div>
+</section>
+
+<!-- Segunda dobra - Destaque -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="section-title">Qualidade que Transforma Ambientes</h2>
+                <p class="section-description">
+                    Nossos móveis são fabricados com materiais de primeira linha e acabamento impecável, garantindo durabilidade e beleza para o seu lar. Cada projeto é único, pensado para otimizar espaços e refletir sua personalidade.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Terceira dobra - Categorias -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title">Nossas Categorias</h2>
+                <p class="section-description">Explore nossas soluções para cada ambiente da sua casa</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for categoria in categorias %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card categoria-card h-100 animate-on-scroll">
+                    <div class="produto-image-container">
+                        <img src="{{ categoria.imagem.url }}" class="card-img-top" alt="{{ categoria.nome }}">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{ categoria.nome }}</h3>
+                        <p class="card-text">{{ categoria.descricao|truncatewords:20 }}</p>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <a href="{% url 'categoria_detalhe' categoria.slug %}" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-right me-2"></i>Ver Produtos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Quarta dobra - Design que Inspira -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <h2 class="section-title">Design que Inspira</h2>
+                <p class="mb-4">
+                    Nossos designers criam soluções que combinam funcionalidade e estética, transformando cada espaço em um ambiente único e personalizado. Trabalhamos com as últimas tendências e tecnologias para oferecer o melhor em móveis planejados.
+                </p>
+                <a href="{% url 'catalogo' %}" class="btn btn-primary">Conheça Nossos Projetos</a>
+            </div>
+            <div class="col-lg-7">
+                <div class="row">
+                    {% for produto in produtos_destaque %}
+                    <div class="col-md-6 mb-4">
+                        <div class="design-inspiration-img">
+                            <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}" class="img-fluid rounded shadow">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Seção de Depoimentos -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title">O que Nossos Clientes Dizem</h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card p-4 h-100 animate-on-scroll">
+                    <div class="testimonial-rating mb-3">
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                    </div>
+                    <p class="testimonial-text">"Os móveis ficaram exatamente como planejamos. A qualidade do material e o acabamento são impecáveis. Recomendo a todos!"</p>
+                    <div class="testimonial-author">
+                        <h5 class="mb-0">Ana Silva</h5>
+                        <small>São Paulo, SP</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card p-4 h-100 animate-on-scroll">
+                    <div class="testimonial-rating mb-3">
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                    </div>
+                    <p class="testimonial-text">"Atendimento excepcional desde o primeiro contato. O projeto foi entregue no prazo e o resultado superou minhas expectativas."</p>
+                    <div class="testimonial-author">
+                        <h5 class="mb-0">Carlos Oliveira</h5>
+                        <small>Rio de Janeiro, RJ</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="testimonial-card p-4 h-100 animate-on-scroll">
+                    <div class="testimonial-rating mb-3">
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                        <i class="fas fa-star text-warning"></i>
+                    </div>
+                    <p class="testimonial-text">"Profissionais extremamente competentes. Conseguiram aproveitar cada centímetro do meu apartamento com soluções criativas e funcionais."</p>
+                    <div class="testimonial-author">
+                        <h5 class="mb-0">Mariana Costa</h5>
+                        <small>Belo Horizonte, MG</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="mb-4">Pronto para Transformar seu Ambiente?</h2>
+                <p class="lead mb-4">Entre em contato conosco para um orçamento personalizado e comece a planejar o ambiente dos seus sonhos.</p>
+                <a href="{% url 'contato' %}" class="btn btn-light btn-lg">Solicitar Orçamento</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Script para o efeito parallax
+    $(window).scroll(function() {
+        var scrollPosition = $(this).scrollTop();
+        $('.parallax-bg').css({
+            'transform': 'translateY(' + (scrollPosition * 0.5) + 'px)'
+        });
+    });
+</script>
+{% endblock %}
